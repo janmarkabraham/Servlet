@@ -1,0 +1,26 @@
+<html>
+<body>
+<%!	public String isTachycardic(String hr){
+	if(Integer.parseInt(hr) > 100){
+		return "Tachycardic";	
+	}
+	return "Normal Rate";
+} 
+%>
+
+<% String firstname = request.getParameter("firstname");
+	String lastname = request.getParameter("lastname");
+	String gender = request.getParameter("gender");
+	String bp = request.getParameter("bp");
+	String hr = request.getParameter("hr");
+	String rate = isTachycardic(hr);
+	
+%>
+First Name is: <%=firstname %>
+Last Name is: <%=lastname %>
+Gender is: <%=gender %>
+Blood pressure is: <%=bp %>
+Heart rate is: <%=hr %>
+Heart rate is: <%=rate %>
+</body>
+</html>

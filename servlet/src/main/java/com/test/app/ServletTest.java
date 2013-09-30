@@ -1,10 +1,15 @@
 package com.test.app;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ServletTest
@@ -24,10 +29,26 @@ public class ServletTest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		response.setStatus(HttpServletResponse.SC_OK);
-		response.getWriter().println("<h1>Servlet</h1>");
-		response.getWriter().println("session=" + request.getSession(true).getId());
+		 response.setContentType("text/html");
+		 Calendar date = new GregorianCalendar();
+		 HttpSession session = request.getSession(true);
+	      PrintWriter out = response.getWriter();
+		  String title = "servlet to JSP";
+	      String docType =
+	      "<!doctype html public \"-//w3c//dtd html 4.0 " +
+	      "transitional//en\">\n";
+	      out.println(docType + "<html>"
+	      		+ "<head><title>Servlet to JSP</title></head>"
+	      		+ "<body><h1>Testing passing values from servlet to jsp via request</h1> <br/>"
+	      		+ "<form action=\"/index.jsp\">First Name:<input type=\"text\" name=\"firstname\"/> <br />"
+	      		+ "Last Name:<input type=\"text\" name=\"lastname\"/> <br />"
+	      		+ "Gender:<input type=\"radio\" name=\"gender\" value=\"male\">Male"
+	      		+ "<input type=\"radio\" name=\"gender\" value=\"female\">Female <br />"
+	      		+ "<u>Vital Signs</u> <br />"
+	      		+ "Time: "+ date.getInstance().getTime().toString() +"<br />"
+	      		+ "Blood Pressure:<input type=\"text\" name=\"bp\"/> <br />"
+	      		+ "Heart Rate:<input type=\"text\" name=\"hr\"/> <br />"	      	
+	      		+ "<input type=\"submit\" value=\"Submit\" /></form></body></html>");
 	}
 
 	/**
